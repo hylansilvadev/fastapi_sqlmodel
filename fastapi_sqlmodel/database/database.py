@@ -1,11 +1,20 @@
-from sqlmodel import create_engine, SQLModel
+from sqlmodel import Session, SQLModel, create_engine
 
-DATABASE_URL = "sqlite:///fastapi_sqlmodel/database/local/database.db"
+from ..core.settings import settings
 
-connect_args = {"check_same_thread": False}
+connect_args = {'check_same_thread': False}
 
-engine = create_engine(DATABASE_URL, echo=True, connect_args=connect_args)
+ENGINE = create_engine(
+    settings.DATABASE_DEVELOPMENT,
+    echo=settings.DATABASE_DEVELOPMENT_ECHO,
+    connect_args=connect_args,
+)
 
 
 def create_db_and_tables():
-    SQLModel.metadata.create_all(engine)
+    SQLModel.metadata.create_all(ENGINE)
+
+
+def get_db():
+    with Session(ENGINE) as session:
+        yield session
