@@ -8,6 +8,8 @@ class Settings(BaseSettings):
 
     DATABASE_DEVELOPMENT: str
     DATABASE_DEVELOPMENT_ECHO: bool
+    PROJECT_NAME: str
+    PROJECT_VERSSION: str
 
 
 settings = Settings()
