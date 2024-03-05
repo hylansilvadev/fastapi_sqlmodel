@@ -9,3 +9,5 @@ poetry.lock
 *.db
 
 .coverage
+
+bruno_projects/
